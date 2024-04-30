@@ -1,0 +1,2 @@
+prompt_toolkit==3.0.43
+python-socketio==5.11.2
