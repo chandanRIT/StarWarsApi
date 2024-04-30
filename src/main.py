@@ -1,4 +1,4 @@
-from src.socket_client import SocketClient
+from socket_client import SocketClient
 from prompt_toolkit import PromptSession
 
 MAX_INPUT_LENGTH = 25
@@ -17,7 +17,7 @@ def main():
 
     while True:
         try:
-            text = session.prompt('> ')
+            text = session.prompt('> Enter your search text:')
             print(f'You entered: {text}, response is below:')
             client.search(text)
         except KeyboardInterrupt:
@@ -26,7 +26,6 @@ def main():
             break
 
     print('Done!')
-
 
 if __name__ == "__main__":
     main()
