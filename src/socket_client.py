@@ -3,39 +3,38 @@ import socketio
 
 class SocketClient:
     HOST_URL = 'http://localhost:3000'
+    TIMEOUT_SECONDS = 10
 
-    def __init__(self):
+    def __init__(self, timeout):
         self.results = []
         self.errors = []
+        self.timeout = timeout
 
     def search(self, query):
         self.results = []
         self.errors = []
 
-        with socketio.SimpleClient() as sio:
-            sio.connect(SocketClient.HOST_URL, transports=['websocket'])
-            sio.emit('search', {'query': query})
+        with socketio.SimpleClient() as client:
+            client.connect(SocketClient.HOST_URL, transports=['websocket'])
+            client.emit('search', {'query': query})
 
-            first_event = sio.receive()
-            _, first_data = first_event
-            # print(f'received first event with data: "{first_data}')
-
+            _, first_data = client.receive(timeout=self.timeout)
             total_rows = first_data["resultCount"]
             print(f'Total number of rows to expect: {total_rows}')
 
-            self.collect_data(first_data)
+            self.process_data(first_data)
 
             for i in range(1, total_rows):
-                event = sio.receive()
-                _, data = event
-                self.collect_data(data)
+                _, data = client.receive(timeout=self.timeout)
+                self.process_data(data)
 
         return self.results, self.errors
 
-    def collect_data(self, data):
+    def process_data(self, data):
         if "error" in data:
             print(f'error is {data["error"]}')
             self.errors.append(data["error"])
+
         else:
             i = data["page"]
             row = {"name": data["name"], "films": data["films"]}

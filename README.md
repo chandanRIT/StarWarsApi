@@ -10,3 +10,12 @@ Steps to run `main.py`
 - Go to the project root on your command line. 
 - Install the deps using `python -m pip install -r requirements.txt`.
 - Then run `python src/main.py`.
+
+**Note about API server unavailability:** 
+
+There is a timeout of 10 seconds, 
+so if the server is unavailable for 10 seconds,
+we see an error in the CLI and you could try the query again. 
+The app wouldn't crash and would continue to prompt for input from the user.
+
+This timeout can be configured in `main.py` with the var `TIMEOUT_SECONDS`.
