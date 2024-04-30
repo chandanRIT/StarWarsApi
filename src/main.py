@@ -12,21 +12,24 @@ def main():
      2. Add a progress bar to indicate the user to wait / provide some visual feedback
      3. Explore async api, see if rows can be fetched async and then ordered and returned 
     """
-    print("Welcome to the StarWars client!")
+    print("Welcome to the StarWars client: You will find only what you bring in!")
 
     while True:
         try:
             text = session.prompt('> Search your favorite characters:')
             print(f'You entered: {text}, response is below:')
             client.search(text)
+
         except KeyboardInterrupt:
             break
+
         except EOFError:
             break
+
         except Exception as e: # handles any connection / unexpected errors
             print(f"Unexpected error: {e}, try again!")
 
-    print('Exiting Search CLI!')
+    print('Exiting StarWars CLI -> Feel the force!')
 
 if __name__ == "__main__":
     main()

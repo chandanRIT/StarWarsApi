@@ -3,7 +3,6 @@ import socketio
 
 class SocketClient:
     HOST_URL = 'http://localhost:3000'
-    TIMEOUT_SECONDS = 10
 
     def __init__(self, timeout):
         self.results = []
