@@ -8,11 +8,14 @@ def main():
     client = SocketClient()
     session = PromptSession()
     """
-     TODOs: 
-     1. check for empty string and return an error without making a socket call
-     2. max user input string length validation
-     3. add a progress bar to indicate the user to wait / provide some visual feedback
-     4. make it async, see if rows can be fetched async and then ordered and returned
+     Improvements: 
+     1. Validate search string for invalid chars, min / max length and return an error without making a socket call
+     2. Add a progress bar to indicate the user to wait / provide some visual feedback
+     3. Explore async api, see if rows can be fetched async and then ordered and returned
+     4. Handle API server unavailability, 
+        scenarios: 
+            a: Stopping the dcoker instance in the middle of receiving responses for a query
+            b. Server is unavailble from the get-go 
     """
 
     while True:
