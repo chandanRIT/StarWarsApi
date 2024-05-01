@@ -1,3 +1,5 @@
+import os
+
 import socketio
 
 
@@ -19,7 +21,7 @@ class SocketClient:
 
             _, first_data = client.receive(timeout=self.timeout)
             total_rows = first_data["resultCount"]
-            print(f'Total number of rows to expect: {total_rows}')
+            print(f'Total rows expected: {total_rows} {os.linesep}')
 
             self.process_data(first_data)
 
