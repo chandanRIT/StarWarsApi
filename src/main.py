@@ -3,6 +3,7 @@ import os
 from socket_client import SocketClient
 from prompt_toolkit import PromptSession
 
+# adjust this timeout to get a quicker error response upon API server unavailability
 CLIENT_TIMEOUT_SECONDS = 10
 HOST_URL = 'http://localhost:3000'
 

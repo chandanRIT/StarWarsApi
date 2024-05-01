@@ -1,18 +1,28 @@
 import os
-
 import socketio
 
 
 class SocketClient:
-
     def __init__(self, host_url, timeout):
         self.results = []
         self.errors = []
         self.timeout = timeout
         self.host_url = host_url
 
-    # does substring match based on the query string, returns a pair of results and errors.
     def search(self, query):
+        """
+            Substring matches on character names and returns a pair of results and errors.
+            Also prints the results and errors to the console.
+
+            Parameters:
+                query (str): The string used for substring search on character names.
+
+            Returns:
+                A pair of results and errors. Both are an array.
+                Each result is a dictionary containing the matched character's name and their films.
+                Each error is a string containing the error description.
+        """
+
         self.results = []
         self.errors = []
 
