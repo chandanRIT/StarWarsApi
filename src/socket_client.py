@@ -4,19 +4,20 @@ import socketio
 
 
 class SocketClient:
-    HOST_URL = 'http://localhost:3000'
 
-    def __init__(self, timeout):
+    def __init__(self, host_url, timeout):
         self.results = []
         self.errors = []
         self.timeout = timeout
+        self.host_url = host_url
 
+    # does substring match based on the query string, returns a pair of results and errors.
     def search(self, query):
         self.results = []
         self.errors = []
 
         with socketio.SimpleClient() as client:
-            client.connect(SocketClient.HOST_URL, transports=['websocket'])
+            client.connect(self.host_url, transports=['websocket'])
             client.emit('search', {'query': query})
 
             _, first_data = client.receive(timeout=self.timeout)
